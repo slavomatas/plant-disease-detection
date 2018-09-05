@@ -1,11 +1,6 @@
-# Grape Plants Disease Detection
-
-<p align=center>
-	<img width=80% src="images/hero.png"/>
-</p>
+# Grape Plant Disease Detection
 
 ### Introduction
-
 
 
 ### Research
