@@ -34,9 +34,7 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 [Grape Leaf Photos](https://drive.google.com/drive/folders/1rdMQr_yYRfk0vHSwFqh1YwZN-M-fd3_K)
 
-### Software setup
-
-Image Segmentation
+### Image Segmentation
 
 [Keras RetinaNet](https://github.com/fizyr/keras-retinanet)
 
