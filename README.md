@@ -23,6 +23,12 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 [Deep Neural Networks Based Recognition of Plant Diseases by Leaf Image Classification](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4934169/)
 
+### Vine mite images
+
+[Vine mite](https://www.google.com/search?q=Vine+mite+images&rlz=1C1GGRV_enUS754US754&source=lnms&tbm=isch&sa=X&ved=0ahUKEwil4dHt-6PdAhXKxlkKHYO8B4sQ_AUICigB&biw=1191&bih=645)
+[Eriophyes vitis](https://www.google.com/search?q=Eriophyes+vitis&source=lnms&tbm=isch&sa=X&ved=0ahUKEwj53tX9_KPdAhUvwlkKHUJ3D20Q_AUICigB&biw=1920&bih=984)
+
+
 ### Hackathon Dataset
 
 [Grape Leaf Photos](https://drive.google.com/drive/folders/1rdMQr_yYRfk0vHSwFqh1YwZN-M-fd3_K)
