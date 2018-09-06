@@ -27,6 +27,7 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 ### Image Recognition (Backbones)
 
+[Learning Deep Features for Visual Recognition](http://deeplearning.csail.mit.edu/cvpr2017_tutorial_kaiminghe.pdf)
 [Keras ResnetXt](https://github.com/titu1994/Keras-ResNeXt)
 
 
@@ -41,6 +42,8 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 [Keras RetinaNet](https://github.com/fizyr/keras-retinanet)
 
 [Mask R-CNN](https://github.com/matterport/Mask_RCNN)
+
+### Examples
 
 [Building a Mask R-CNN Model for Detecting Car Damage](https://www.analyticsvidhya.com/blog/2018/07/building-mask-r-cnn-model-detecting-damage-cars-python/?utm_source=feedburner&utm_medium=email&utm_campaign=Feed%3A+AnalyticsVidhya+%28Analytics+Vidhya%29)
 
