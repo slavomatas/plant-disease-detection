@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.initializers import TruncatedNormal
+from keras.optimizers import Adam
 
 from tqdm import tqdm
 from glob import glob
@@ -54,13 +55,13 @@ def plot_accuracy_loss(history):
     plt.show()
 
 
-def Xception_predict_breed(img_path, model, dog_names):
+def Xception_predict(img_path, model, dog_names):
     # extract bottleneck features
     bottleneck_feature = extract_Xception(path_to_tensor(img_path))
     # obtain predicted vector
     predicted_vector = model.predict(bottleneck_feature)
-    # return dog breed that is predicted by the model
-    return dog_names[np.argmax(predicted_vector)]
+    # return leaf category - healthy vs damaged
+    return np.argmax(predicted_vector)]
 
 
 # Model Architecture
@@ -87,18 +88,17 @@ def create_model(input_shape):
     model.add(BatchNormalization())
     model.add(Dropout(0.5))
 
-    model.add(Dense(133, activation='softmax',
+    model.add(Dense(4, activation='softmax',
                     kernel_initializer=init,
                     bias_initializer='zeros'))
 
     model.summary()
 
     # Adam optimizer
-    #adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+    adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
 
     # Compile the Model
-    #model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
-    model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
 
     return model
 
@@ -133,14 +133,14 @@ def train_model():
 
 # ### Test the Model
 #
-# Now, we can use the CNN to test how well it identifies breed within our test dataset of dog images.
+# Now, we can use the CNN to test how well it identifies .
 # We print the test accuracy below.
 def test_model():
 
     # Load train, test, and validation datasets
-    train_files, train_targets = load_dataset('/home/slavo/Dev/image-classification/dogImages/train')
-    valid_files, valid_targets = load_dataset('/home/slavo/Dev/image-classification/dogImages/valid')
-    test_files, test_targets = load_dataset('/home/slavo/Dev/image-classification/dogImages/test')
+    train_files, train_targets = load_dataset('/home/slavo/Dev/plan-disease-detection/images/train')
+    valid_files, valid_targets = load_dataset('/home/slavo/Dev/plan-disease-detection/images/valid')
+    test_files, test_targets = load_dataset('/home/slavo/Dev/plan-disease-detection/images/test')
 
     # Load list of dog names
     dog_names = [item[20:-1] for item in sorted(glob("/home/slavo/Dev/image-classification/dogImages/train/*/"))]
