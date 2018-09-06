@@ -18,6 +18,7 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 [Deep Neural Networks Based Recognition of Plant Diseases by Leaf Image Classification](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4934169/)
 
+
 ### Vine mite images
 
 [Vine mite](https://www.google.com/search?q=Vine+mite+images&rlz=1C1GGRV_enUS754US754&source=lnms&tbm=isch&sa=X&ved=0ahUKEwil4dHt-6PdAhXKxlkKHYO8B4sQ_AUICigB&biw=1191&bih=645)
@@ -28,12 +29,16 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 ### Image Recognition (Backbones)
 
 [Learning Deep Features for Visual Recognition](http://deeplearning.csail.mit.edu/cvpr2017_tutorial_kaiminghe.pdf)
+
 [Keras ResnetXt](https://github.com/titu1994/Keras-ResNeXt)
+
+[ResnetXt.pytorch](https://github.com/prlz77/ResNeXt.pytorch)
 
 
 ### Object detection
 
 [Tensorflow Object Detection](https://medium.com/@rlancemartin/tensorflow-object-detection-72715c61e49a)
+
 [Tensorflow Object Detection github](https://github.com/tensorflow/models/tree/master/research/object_detection)
 
 
@@ -43,13 +48,20 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 [Mask R-CNN](https://github.com/matterport/Mask_RCNN)
 
+[Detectron.pytorch](https://github.com/roytseng-tw/Detectron.pytorch)
+
+[Detectron](https://github.com/facebookresearch/Detectron)
+
 ### Examples
 
 [Building a Mask R-CNN Model for Detecting Car Damage](https://www.analyticsvidhya.com/blog/2018/07/building-mask-r-cnn-model-detecting-damage-cars-python/?utm_source=feedburner&utm_medium=email&utm_campaign=Feed%3A+AnalyticsVidhya+%28Analytics+Vidhya%29)
 
 
+### COCO Dataset
+
+[Coco](http://cocodataset.org/#download)
+
 ### Hackathon Dataset
 
 [Grape Leaf Photos](https://drive.google.com/drive/folders/1rdMQr_yYRfk0vHSwFqh1YwZN-M-fd3_K)
 
-[Coco](http://cocodataset.org/#download)
