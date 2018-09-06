@@ -13,6 +13,7 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 [Mohanty, Hughes, Salathé - Using Deep Learning for Image-Based Plant Disease Detection](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5032846/)
 
 [Plantvillage Deep Learning Dataset](https://github.com/salathegroup/plantvillage_deeplearning_paper_dataset)
+
 [Plantvillage Deep Paper Analysis](https://github.com/salathegroup/plantvillage_deeplearning_paper_analysis)
 
 
@@ -29,8 +30,16 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 [Grape Leaf Photos](https://drive.google.com/drive/folders/1rdMQr_yYRfk0vHSwFqh1YwZN-M-fd3_K)
 
+[Coco](http://cocodataset.org/#download)
+
+### Image Recognition (Backbones)
+
+[Keras ResnetXt](https://github.com/titu1994/Keras-ResNeXt)
+
 ### Image Segmentation
 
 [Keras RetinaNet](https://github.com/fizyr/keras-retinanet)
+
+[Mask R-CNN](https://github.com/matterport/Mask_RCNN)
 
 
