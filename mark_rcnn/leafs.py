@@ -1,6 +1,6 @@
 """
 Mask R-CNN
-Train on the Leafs dataset
+Train on the Leaf dataset
 
 ------------------------------------------------------------
 
@@ -8,19 +8,19 @@ Usage: import the module (see Jupyter notebooks for examples), or run from
        the command line as such:
 
     # Train a new model starting from pre-trained COCO weights
-    python3 leaf.py train --dataset=/path/to/balloon/dataset --weights=coco
+    python3 leafs.py train --dataset=/path/to/leafs/dataset --weights=coco
 
     # Resume training a model that you had trained earlier
-    python3 leaf.py train --dataset=/path/to/balloon/dataset --weights=last
+    python3 leafs.py train --dataset=/path/to/leafs/dataset --weights=last
 
     # Train a new model starting from ImageNet weights
-    python3 leaf.py train --dataset=/path/to/balloon/dataset --weights=imagenet
+    python3 leafs.py train --dataset=/path/to/leafs/dataset --weights=imagenet
 
     # Apply color splash to an image
-    python3 leaf.py splash --weights=/path/to/weights/file.h5 --image=<URL or path to file>
+    python3 leafs.py splash --weights=/path/to/weights/file.h5 --image=<URL or path to file>
 
     # Apply color splash to video using the last weights you trained
-    python3 leaf.py splash --weights=last --video=<URL or path to file>
+    python3 leafs.py splash --weights=last --video=<URL or path to file>
 """
 
 import os
@@ -39,7 +39,7 @@ from mrcnn.config import Config
 from mrcnn import model as modellib, utils
 
 # Path to trained weights file
-COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
+COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "./weights/mask_rcnn_coco.h5")
 
 # Directory to save logs and model checkpoints, if not provided
 # through the command line argument --logs
@@ -50,19 +50,19 @@ DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 ############################################################
 
 
-class LeafConfig(Config):
-    """Configuration for training on the toy  dataset.
+class LeafsConfig(Config):
+    """Configuration for training on the Leafs dataset.
     Derives from the base Config class and overrides some values.
     """
     # Give the configuration a recognizable name
-    NAME = "leaf"
+    NAME = "leafs"
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
     IMAGES_PER_GPU = 2
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 1  # Background + balloon
+    NUM_CLASSES = 1 + 1  # Background + leafs
 
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 100
@@ -75,15 +75,16 @@ class LeafConfig(Config):
 #  Dataset
 ############################################################
 
-class LeafDataset(utils.Dataset):
+class LeafsDataset(utils.Dataset):
 
     def load_leaf(self, dataset_dir, subset):
         """Load a subset of the Leaf dataset.
         dataset_dir: Root directory of the dataset.
         subset: Subset to load: train or val
         """
-        # Add classes. We have only one class to add.
-        self.add_class("balloon", 1, "balloon")
+        # Add classes
+        self.add_class("leafs", 1, "roztoc")
+        self.add_class("leafs", 2, "esca")
 
         # Train or validation dataset?
         assert subset in ["train", "val"]
@@ -126,7 +127,7 @@ class LeafDataset(utils.Dataset):
             height, width = image.shape[:2]
 
             self.add_image(
-                "balloon",
+                "leafs",
                 image_id=a['filename'],  # use file name as a unique image id
                 path=image_path,
                 width=width, height=height,
@@ -139,9 +140,9 @@ class LeafDataset(utils.Dataset):
             one mask per instance.
         class_ids: a 1D array of class IDs of the instance masks.
         """
-        # If not a balloon dataset image, delegate to parent class.
+        # If not a leafs dataset image, delegate to parent class.
         image_info = self.image_info[image_id]
-        if image_info["source"] != "balloon":
+        if image_info["source"] != "leafs":
             return super(self.__class__, self).load_mask(image_id)
 
         # Convert polygons to a bitmap mask of shape
@@ -161,7 +162,7 @@ class LeafDataset(utils.Dataset):
     def image_reference(self, image_id):
         """Return the path of the image."""
         info = self.image_info[image_id]
-        if info["source"] == "balloon":
+        if info["source"] == "leafs":
             return info["path"]
         else:
             super(self.__class__, self).image_reference(image_id)
@@ -170,12 +171,12 @@ class LeafDataset(utils.Dataset):
 def train(model):
     """Train the model."""
     # Training dataset.
-    dataset_train = LeafDataset()
+    dataset_train = LeafsDataset()
     dataset_train.load_leaf(args.dataset, "train")
     dataset_train.prepare()
 
     # Validation dataset
-    dataset_val = LeafDataset()
+    dataset_val = LeafsDataset()
     dataset_val.load_leaf(args.dataset, "val")
     dataset_val.prepare()
 
@@ -271,13 +272,13 @@ if __name__ == '__main__':
 
     # Parse command line arguments
     parser = argparse.ArgumentParser(
-        description='Train Mask R-CNN to detect balloons.')
+        description='Train Mask R-CNN to detect leafs.')
     parser.add_argument("command",
                         metavar="<command>",
                         help="'train' or 'splash'")
     parser.add_argument('--dataset', required=False,
-                        metavar="/path/to/balloon/dataset/",
-                        help='Directory of the Balloon dataset')
+                        metavar="/path/to/leafs/dataset/",
+                        help='Directory of the leafs dataset')
     parser.add_argument('--weights', required=True,
                         metavar="/path/to/weights.h5",
                         help="Path to weights .h5 file or 'coco'")
@@ -306,9 +307,9 @@ if __name__ == '__main__':
 
     # Configurations
     if args.command == "train":
-        config = BalloonConfig()
+        config = LeafsConfig()
     else:
-        class InferenceConfig(BalloonConfig):
+        class InferenceConfig(LeafsConfig):
             # Set batch size to 1 since we'll be running inference on
             # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
             GPU_COUNT = 1

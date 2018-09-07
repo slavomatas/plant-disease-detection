@@ -44,13 +44,14 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 ### Instance Segmentation
 
-[Keras RetinaNet](https://github.com/fizyr/keras-retinanet)
-
 [Mask R-CNN](https://github.com/matterport/Mask_RCNN)
+
+[Keras RetinaNet](https://github.com/fizyr/keras-retinanet)
 
 [Detectron.pytorch](https://github.com/roytseng-tw/Detectron.pytorch)
 
-[Detectron](https://github.com/facebookresearch/Detectron)
+[Detectron.caffe](https://github.com/facebookresearch/Detectron)
+
 
 ### Examples
 
