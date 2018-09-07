@@ -113,9 +113,11 @@ class LeafsDataset(utils.Dataset):
 
         # Add images
         for a in annotations:
-            # Get the x, y coordinaets of points of the polygons that make up
+            # Get the x, y coordinates of points of the polygons that make up
             # the outline of each object instance. There are stores in the
             # shape_attributes (see json format above)
+
+            """
             polygons = [r['shape_attributes'] for r in a['regions']]
 
             # load_mask() needs the image size to convert polygons to masks.
@@ -132,6 +134,25 @@ class LeafsDataset(utils.Dataset):
                 width=width, height=height,
                 polygons=polygons)
 
+            """
+
+            circles = [r['shape_attributes'] for r in a['regions']]
+
+            # load_mask() needs the image size to convert polygons to masks.
+            # Unfortunately, VIA doesn't include it in JSON, so we must read
+            # the image. This is only managable since the dataset is tiny.
+            image_path = os.path.join(dataset_dir, a['filename'])
+            image = skimage.io.imread(image_path)
+            height, width = image.shape[:2]
+
+            self.add_image(
+                "leafs",
+                image_id=a['filename'],  # use file name as a unique image id
+                path=image_path,
+                width=width, height=height,
+                circles=circles)
+
+
     def load_mask(self, image_id):
         """Generate instance masks for an image.
        Returns:
@@ -144,14 +165,27 @@ class LeafsDataset(utils.Dataset):
         if image_info["source"] != "leafs":
             return super(self.__class__, self).load_mask(image_id)
 
+        """
         # Convert polygons to a bitmap mask of shape
         # [height, width, instance_count]
         info = self.image_info[image_id]
-        mask = np.zeros([info["height"], info["width"], len(info["polygons"])],
-                        dtype=np.uint8)
+        mask = np.zeros([info["height"], info["width"], len(info["polygons"])], dtype=np.uint8)
+
         for i, p in enumerate(info["polygons"]):
             # Get indexes of pixels inside the polygon and set them to 1
             rr, cc = skimage.draw.polygon(p['all_points_y'], p['all_points_x'])
+            mask[rr, cc, i] = 1
+        """
+
+        # Convert polygons to a bitmap mask of shape
+        # [height, width, instance_count]
+        info = self.image_info[image_id]
+        print("Image {}".format(info['id']))
+        mask = np.zeros([info["height"], info["width"], len(info["circles"])], dtype=np.uint8)
+
+        for i, p in enumerate(info["circles"]):
+            # Get indexes of pixels inside the polygon and set them to 1
+            rr, cc = skimage.draw.circle(p['cy'], p['cx'], p['r'])
             mask[rr, cc, i] = 1
 
         # Return mask, and array of class IDs of each instance. Since we have
