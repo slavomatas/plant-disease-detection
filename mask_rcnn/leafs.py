@@ -180,7 +180,7 @@ class LeafsDataset(utils.Dataset):
         # Convert polygons to a bitmap mask of shape
         # [height, width, instance_count]
         info = self.image_info[image_id]
-        print("Image {}".format(info['id']))
+        #print("Image {}".format(info['id']))
         mask = np.zeros([info["height"], info["width"], len(info["circles"])], dtype=np.uint8)
 
         for i, p in enumerate(info["circles"]):
