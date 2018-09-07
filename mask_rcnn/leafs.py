@@ -77,14 +77,13 @@ class LeafsConfig(Config):
 
 class LeafsDataset(utils.Dataset):
 
-    def load_leaf(self, dataset_dir, subset):
+    def load_leafs(self, dataset_dir, subset):
         """Load a subset of the Leaf dataset.
         dataset_dir: Root directory of the dataset.
         subset: Subset to load: train or val
         """
         # Add classes
-        self.add_class("leafs", 1, "roztoc")
-        self.add_class("leafs", 2, "esca")
+        self.add_class("leafs", 1, "disease")
 
         # Train or validation dataset?
         assert subset in ["train", "val"]
@@ -105,7 +104,7 @@ class LeafsDataset(utils.Dataset):
         #   'size': 100202
         # }
         # We mostly care about the x and y coordinates of each region
-        annotations = json.load(open(os.path.join(dataset_dir, "via_region_data.json")))
+        annotations = json.load(open(os.path.join(dataset_dir, "via_leafs_data.json")))
         annotations = list(annotations.values())  # don't need the dict keys
 
         # The VIA tool saves images in the JSON even if they don't have any
