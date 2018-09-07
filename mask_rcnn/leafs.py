@@ -31,7 +31,7 @@ import numpy as np
 import skimage.draw
 
 # Root directory of the project
-ROOT_DIR = os.path.abspath("../../")
+ROOT_DIR = os.path.abspath("/home/slavo/Dev/plant-disease-detection")
 
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
@@ -39,7 +39,7 @@ from mrcnn.config import Config
 from mrcnn import model as modellib, utils
 
 # Path to trained weights file
-COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "./weights/mask_rcnn_coco.h5")
+COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "weights/mask_rcnn_leafs.h5")
 
 # Directory to save logs and model checkpoints, if not provided
 # through the command line argument --logs
@@ -171,12 +171,12 @@ def train(model):
     """Train the model."""
     # Training dataset.
     dataset_train = LeafsDataset()
-    dataset_train.load_leaf(args.dataset, "train")
+    dataset_train.load_leafs(args.dataset, "train")
     dataset_train.prepare()
 
     # Validation dataset
     dataset_val = LeafsDataset()
-    dataset_val.load_leaf(args.dataset, "val")
+    dataset_val.load_leafs(args.dataset, "val")
     dataset_val.prepare()
 
     # *** This training schedule is an example. Update to your needs ***
