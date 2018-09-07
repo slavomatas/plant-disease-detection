@@ -105,18 +105,18 @@ class LeafsDataset(utils.Dataset):
         # }
         # We mostly care about the x and y coordinates of each region
         annotations = json.load(open(os.path.join(dataset_dir, "via_leafs_data.json")))
-        annotations = list(annotations.values())  # don't need the dict keys
+        annotations = list(annotations['_via_img_metadata'].values())  # don't need the dict keys
 
         # The VIA tool saves images in the JSON even if they don't have any
         # annotations. Skip unannotated images.
-        annotations = [a for a in annotations if a['regions']]
+        annotations = [a for a in annotations if 'regions' in a]
 
         # Add images
         for a in annotations:
             # Get the x, y coordinaets of points of the polygons that make up
             # the outline of each object instance. There are stores in the
             # shape_attributes (see json format above)
-            polygons = [r['shape_attributes'] for r in a['regions'].values()]
+            polygons = [r['shape_attributes'] for r in a['regions']]
 
             # load_mask() needs the image size to convert polygons to masks.
             # Unfortunately, VIA doesn't include it in JSON, so we must read
