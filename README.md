@@ -52,6 +52,7 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 [Detectron.caffe](https://github.com/facebookresearch/Detectron)
 
+[Unet](https://github.com/ternaus/TernausNet)
 
 ### Examples
 
