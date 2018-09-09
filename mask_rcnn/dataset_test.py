@@ -22,7 +22,7 @@ for i, info in enumerate(dataset.class_info):
 
 
 # Load and display random samples
-image_ids = np.random.choice(dataset.image_ids, 4)
+image_ids = np.random.choice(dataset.image_ids, 20)
 for image_id in image_ids:
     image = dataset.load_image(image_id)
     mask, class_ids = dataset.load_mask(image_id)
