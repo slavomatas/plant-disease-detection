@@ -11,7 +11,6 @@ from sklearn.datasets import load_files
 
 from keras.applications import VGG16, ResNet50, Xception
 from keras.preprocessing.image import ImageDataGenerator
-from keras.utils import np_utils
 from keras.layers import GlobalAveragePooling2D, Flatten, BatchNormalization
 from keras.layers import Dropout, Dense
 from keras.models import Sequential
@@ -19,8 +18,7 @@ from keras.callbacks import ModelCheckpoint
 from keras.preprocessing import image
 #from extract_bottleneck_features import *
 
-# load list of dog names
-dog_names = [item[20:-1] for item in sorted(glob("/home/slavo/Dev/image-classification/dogImages/train/*/"))]
+from transfer_learning.data_loader import path_to_tensor, load_dataset
 
 import random
 random.seed(8675309)
@@ -68,7 +66,7 @@ def create_model():
     model.summary()
 
     # Compile the Model
-    model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
     return model
 
@@ -95,7 +93,7 @@ def train_model():
     # and indefinitely generate batches of augmented image data
     train_generator = train_datagen.flow_from_directory(
         train_dir,
-        target_size=(224, 224),
+        target_size=(640, 480),
         batch_size=batch_size,
         class_mode='categorical')
 
@@ -105,7 +103,7 @@ def train_model():
     # this is a similar generator, for validation data
     validation_generator = validation_datagen.flow_from_directory(
         validation_dir,
-        target_size=(224, 224),
+        target_size=(640, 480),
         batch_size=batch_size,
         class_mode='categorical')
 
@@ -118,7 +116,7 @@ def train_model():
     history = model.fit_generator(
         train_generator,
         steps_per_epoch=100,
-        epochs=500,
+        epochs=20,
         validation_data=validation_generator,
         validation_steps=50,
         callbacks=[checkpointer],
@@ -146,41 +144,30 @@ def plot_accuracy_loss(history):
 
 
 def test_model():
-    # Now, we can use the CNN to test how well it identifies breed within our test dataset of dog images.
-    # We print the test accuracy below.
 
-    # ### Load the Model with the Best Validation Loss
-    # model.load_weights('saved_models/weights.best.rmsprop.hdf5')
+    # Load filenames in shuffled human dataset
+    #test_files = [item for item in sorted(glob("/home/slavo/Dev/plant-disease-detection/images/valid/*/*"))]
 
-    # get index of predicted dog breed for each image in test set
-    Xception(weights='imagenet', include_top=False)
-    model_predictions = [np.argmax(model.predict(np.expand_dims(feature, axis=0))) for feature in testing_features]
+    test_files, test_targets = load_dataset("/home/slavo/Dev/plant-disease-detection/images/test")
 
-    # report test accuracy
+    # Load the Model with the Best Validation Loss
+    model = create_model()
+    model.load_weights('saved_models/transfer_learning_v1.hdf5')
+
+    model_predictions = []
+
+    # Get index of predicted class for each image in test set
+    for test_file, test_target in zip(test_files, test_targets):
+        predicted_class_probs = model.predict(path_to_tensor(test_file))
+        predicted_argmax_class = np.argmax(predicted_class_probs)
+        print("Test file {}".format(test_file))
+        print("Predicted class probs {} argmax class {} target {}".format(predicted_class_probs, predicted_argmax_class, test_target))
+        model_predictions.append(predicted_argmax_class)
+
+    # Report test accuracy
     test_accuracy = 100 * np.sum(np.array(model_predictions) == np.argmax(test_targets, axis=1)) / len(model_predictions)
     print('Test accuracy: %.4f%%' % test_accuracy)
 
-    # ### Predict Dog Breed with the Model
-    def ResNet50_predict_breed(img_path):
-        # extract bottleneck features
-        bottleneck_feature = extract_Resnet50(path_to_tensor(img_path))
-        # obtain predicted vector
-        predicted_vector = model.predict(bottleneck_feature)
-        # return dog breed that is predicted by the model
-        return dog_names[np.argmax(predicted_vector)]
 
-    ### TODO: Test the performance of the leaf_detector function
-
-    dog_files_short = train_files[:100]
-    dog_targets_short = train_targets[:100]
-
-    human_files_short = human_files[:100]
-
-    for dog_file in dog_files_short:
-        print("Prediction:", ResNet50_predict_breed(dog_file))
-
-        for human_file in human_files_short:
-            print("Prediction:", ResNet50_predict_breed(human_file))
-
-
-train_model()
+#train_model()
+test_model()
