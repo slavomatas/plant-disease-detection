@@ -1,11 +1,9 @@
 import numpy as np
 
 from tqdm import tqdm
-from glob import glob
 from sklearn.datasets import load_files
 from keras.utils import np_utils
 from keras.preprocessing import image
-from extract_bottleneck_features import *
 
 
 def path_to_tensor(img_path):
@@ -33,14 +31,16 @@ def load_dataset(path):
 # Load train, test, and validation datasets
 leaf_files, leaf_targets = load_dataset('/home/slavo/Dev/plant-disease-detection/images/')
 
-train_files = leaf_files[:-40]
-train_targets = leaf_targets[:-40]
+train_files = leaf_files[:-80]
+train_targets = leaf_targets[:-80]
 
-valid_files = leaf_files[-40:-20]
-valid_targets = leaf_targets[-40:-20]
+valid_files = leaf_files[-80:-40]
+valid_targets = leaf_targets[-80:-40]
 
-test_files = leaf_files[-20:]
-test_targets = leaf_targets[-20:]
+test_files = leaf_files[-40:]
+test_targets = leaf_targets[-40:]
 
 print("Leaf files {}".format(len(leaf_files)))
-print("Train files{}".format(len(leaf_files)))
+print("Train files {}".format(len(train_files)))
+print("Validation files {}".format(len(valid_files)))
+print("Test files {}".format(len(test_files)))
