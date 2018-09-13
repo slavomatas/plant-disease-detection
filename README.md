@@ -46,6 +46,8 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 
 [Mask R-CNN](https://github.com/matterport/Mask_RCNN)
 
+[Instance Segmentation with Mask R-CNN and TensorFlow](https://engineering.matterport.com/splash-of-color-instance-segmentation-with-mask-r-cnn-and-tensorflow-7c761e238b46)
+
 [Keras RetinaNet](https://github.com/fizyr/keras-retinanet)
 
 [Detectron.pytorch](https://github.com/roytseng-tw/Detectron.pytorch)
