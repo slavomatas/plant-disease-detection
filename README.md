@@ -26,35 +26,35 @@ segmentation and soft computing techniques](https://www.sciencedirect.com/scienc
 [Eriophyes vitis](https://www.google.com/search?q=Eriophyes+vitis&source=lnms&tbm=isch&sa=X&ved=0ahUKEwj53tX9_KPdAhUvwlkKHUJ3D20Q_AUICigB&biw=1920&bih=984)
 
 
-### Image Recognition (Backbones)
+### Image Classification (Backbones)
 
-[Learning Deep Features for Visual Recognition](http://deeplearning.csail.mit.edu/cvpr2017_tutorial_kaiminghe.pdf)
+[He - Learning Deep Features for Visual Recognition](http://deeplearning.csail.mit.edu/cvpr2017_tutorial_kaiminghe.pdf)
 
-[Keras ResnetXt](https://github.com/titu1994/Keras-ResNeXt)
+[Keras ResnetXt (titu1994 github)](https://github.com/titu1994/Keras-ResNeXt)
 
-[ResnetXt.pytorch](https://github.com/prlz77/ResNeXt.pytorch)
+[ResnetXt.pytorch (prlz77)](https://github.com/prlz77/ResNeXt.pytorch)
 
 
-### Object detection
+### Object Detection, Semantic and Instance Segmentation 
 
-[Tensorflow Object Detection](https://medium.com/@rlancemartin/tensorflow-object-detection-72715c61e49a)
+[Abdulla - Splash of Color: Instance Segmentation with Mask R-CNN and TensorFlow (Medium)](https://engineering.matterport.com/splash-of-color-instance-segmentation-with-mask-r-cnn-and-tensorflow-7c761e238b46)
+
+[Martin - Tensorflow Object Detection (Medium)](https://medium.com/@rlancemartin/tensorflow-object-detection-72715c61e49a)
 
 [Tensorflow Object Detection github](https://github.com/tensorflow/models/tree/master/research/object_detection)
 
+[Google Blog - Supercharge your Computer Vision models with the TensorFlow Object Detection API](https://ai.googleblog.com/2017/06/supercharge-your-computer-vision-models.html)
 
-### Instance Segmentation
+[Mask R-CNN (matterport github)](https://github.com/matterport/Mask_RCNN)
 
-[Mask R-CNN](https://github.com/matterport/Mask_RCNN)
+[Keras RetinaNet (fizyr github)](https://github.com/fizyr/keras-retinanet)
 
-[Instance Segmentation with Mask R-CNN and TensorFlow](https://engineering.matterport.com/splash-of-color-instance-segmentation-with-mask-r-cnn-and-tensorflow-7c761e238b46)
-
-[Keras RetinaNet](https://github.com/fizyr/keras-retinanet)
-
-[Detectron.pytorch](https://github.com/roytseng-tw/Detectron.pytorch)
+[Detectron.pytorch (roytseng-tw github)](https://github.com/roytseng-tw/Detectron.pytorch)
 
 [Detectron.caffe](https://github.com/facebookresearch/Detectron)
 
 [Unet](https://github.com/ternaus/TernausNet)
+
 
 ### Examples
 
